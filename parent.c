@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main()
+{
+    pid_t pid;
+
+    pid = fork();
+
+    if(pid == 0)
+    {
+        execl("./child", "child", NULL);
+    }
+    else
+    {
+        printf("Parent Process PID = %d\n", getpid());
+        printf("Child PID = %d\n", pid);
+
+        wait(NULL);
+    }
+
+    return 0;
+}
